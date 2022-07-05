@@ -72,10 +72,8 @@ Route::post('plus', [KlentController::class, 'plus'])->name('plus');
 Route::post('minus', [KlentController::class, 'minus'])->name('minus');
 Route::post('udalit', [KlentController::class, 'udalit'])->name('udalit');
 Route::post('yangilash', [KlentController::class, 'yangilash'])->name('yangilash');
-// Route::post('tugle', [KlentController::class, 'tugle'])->name('tugle');
 Route::get('rachot', [KlentController::class, 'rachot'])->name('rachot');
 Route::post('oplata', [KlentController::class, 'oplata'])->name('oplata');
-// Route::post('zakazayt', [KlentController::class, 'zakazayt'])->name('zakazayt');
 
 Route::post('data', [KlentController::class, 'data'])->name('data');
 Route::get('tavar', [KlentController::class, 'tavar'])->name('tavar');

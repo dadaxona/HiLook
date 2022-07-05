@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('summa')->nullable();
             $table->integer('summa2')->nullable();
             $table->string('kod')->nullable();
+            $table->integer('jami')->nullable();
+            $table->integer('sotjami')->nullable();
             $table->timestamps();
         });
     }

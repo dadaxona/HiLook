@@ -275,6 +275,7 @@ class KlentController extends KlentController2
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'son' => 'required',
+            'dona' => 'required',
             'summa' => 'required',
             'summa2' => 'required',
             'kod' => 'nullable',
@@ -350,7 +351,8 @@ class KlentController extends KlentController2
     {
         $validator = Validator::make($request->all(), [
             'addmore.*.name' => 'required',
-            'addmore.*.son' => 'nullable',
+            'addmore.*.son' => 'required',
+            'addmore.*.dona' => 'required',
             'addmore.*.summa' => 'required',
             'addmore.*.summa2' => 'required',
             'addmore.*.kod' => 'required',

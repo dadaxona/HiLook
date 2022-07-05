@@ -240,16 +240,14 @@
           },
           success:function(data){
             if(data.code == 200){
-              $(form)[0].reset();
-              fetch_customer_data();
               $('#name').val('');
               $('#son').val('');              
               $('#dona').val('');
               $('#summa').val('');
               $('#summa2').val('');
               $('#kod').val('');
-              $('#tavar2').toggle('fold', 1000);
               toastr.success(data.msg);
+              location.reload(true);
             }
             if(data.code == 0){
               $.each(data.error, function(prefix, val){
@@ -258,15 +256,14 @@
               toastr.error(data.msg);
             }
             if(data.code == 201){
-              fetch_customer_data();
               $('#name').val('');
               $('#son').val('');              
               $('#dona').val('');
               $('#summa').val('');
               $('#summa2').val('');
               $('#kod').val('');
-              $('#tavar2').toggle('fold', 1000);
               toastr.success(data.msg);
+              location.reload(true);
             }           
           }
         });

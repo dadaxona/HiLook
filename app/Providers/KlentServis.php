@@ -39,28 +39,16 @@ class KlentServis
     
     public function store($request)
     {
-        if($request->id){
-            return $this->update($request);        
-        }else{
-            $data = User::where('name', $request->name)->where('kod', $request->kod)->first();
-            if ($data) {
-                $sss = $data->son + $request->son;
-                User::where('name', $request->name)->where('kod', $request->kod)->update([
-                    'son'=>$sss,
-                    'summa'=>$request->summa, 
-                    'summa2'=>$request->summa2,
-                ]);
-                $data2 = User::where('name', $request->name)->where('kod', $request->kod)->first();
-            }else{
-               $data2 = User::create($request->all());
-            }
-            return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data2], 200);         
-        }
-    }
-
-    public function update($request)
-    {
-        User::find($request->id)->update($request->all());
+        $javob = $request->son * $request->dona;
+        User::find($request->id)->update([
+            'name'=>$request->name,
+            'son'=>$request->son,
+            'dona'=>$request->dona,
+            'summa'=>$request->summa, 
+            'summa2'=>$request->summa2, 
+            'kod'=>$request->kod,
+            'jami'=>$javob,
+        ]);
         $data = User::find($request->id);
         return response()->json(['code'=>201, 'msg'=>'Мувофакиятли янгиланди','data' => $data], 201);
     }
@@ -107,15 +95,28 @@ class KlentServis
         foreach ($request->addmore as $value) {
             $data = User::where('name', $value["name"])->where('kod', $value["kod"])->first();
             if ($data) {
-                $sss = $data->son + $value["son"];
+                $son = $data->son + $value["son"];
+                $dona = $data->dona + $value["dona"];
+                $aaa = $data->jami + $value["son"] * $value["dona"];
                 User::where('name', $value["name"])->where('kod', $value["kod"])->update([
-                    'son'=>$sss,
-                    'summa'=>$value->summa, 
-                    'summa2'=>$value->summa2,
+                    'son'=>$son,
+                    'dona'=>$dona,
+                    'summa'=>$value["summa"], 
+                    'summa2'=>$value["summa2"],
+                    'jami'=>$aaa,
                 ]);
                 $data2 = User::where('name', $value["name"])->where('kod', $value["kod"])->first();
             }else{
-               $data2 = User::create($value);
+                $aaa1 = $value["son"] * $value["dona"];
+                $data2 = User::create([
+                    'name'=>$value["name"],
+                    'son'=>$value["son"],
+                    'dona'=>$value["dona"],
+                    'summa'=>$value["summa"], 
+                    'summa2'=>$value["summa2"],
+                    'kod'=>$value["kod"],
+                    'jami'=>$aaa1,
+                ]);
             }
         }
         return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data2], 200);
@@ -193,30 +194,36 @@ class KlentServis
     public function sazdat($request)
     {
         $foo = User::find($request->id);
-        $dat = Karzina::create([
-            'user_id' => $foo->id,
-            'name' => $foo->name,
-            'raqam'=>$foo->kod,
-            'soni' => $request->sonkal,
-            'dona' => $request->donakal,
-            'summa2' => $foo->summa2,
-            'itog'=>$request->sot
-        ]);
-        $ito = Itogo::find(1);
-        if($ito){
-            $j = $ito->itogo + $request->sot;
-            Itogo::find(1)->update([
-                'itogo'=>$j,
-            ]);
-            $ito2 = Itogo::find(1);
-            return response()->json(['msg'=>'Кошилди', 'data'=>$dat, 'data2'=>$ito2]);
-
+        if($foo->son < $request->sonkal){
+            return response()->json(['msg'=>'Хажим устуни белгиланган кийматдан коп', 'code'=>0]);
+        }elseif ($foo->dona < $request->donakal) {
+            return response()->json(['msg'=>'Сон устуни белгиланган кийматдан коп', 'code'=>0]);        
         }else{
-            Itogo::create([
-                'itogo'=>$request->sot
+            $dat = Karzina::create([
+                'user_id' => $foo->id,
+                'name' => $foo->name,
+                'raqam'=>$foo->kod,
+                'soni' => $request->sonkal,
+                'dona' => $request->donakal,
+                'summa2' => $foo->summa2,
+                'itog'=>$request->sot
             ]);
-            $ito3 = Itogo::find(1);
-            return response()->json(['msg'=>'Кошилди', 'data'=>$dat, 'data2'=>$ito3]);
+            $ito = Itogo::find(1);
+            if($ito){
+                $j = $ito->itogo + $request->sot;
+                Itogo::find(1)->update([
+                    'itogo'=>$j,
+                ]);
+                $ito2 = Itogo::find(1);
+                return response()->json(['msg'=>'Кошилди', 'data'=>$dat, 'data2'=>$ito2]);
+    
+            }else{
+                Itogo::create([
+                    'itogo'=>$request->sot
+                ]);
+                $ito3 = Itogo::find(1);
+                return response()->json(['msg'=>'Кошилди', 'data'=>$dat, 'data2'=>$ito3]);
+            }
         }
     }
 
@@ -364,11 +371,42 @@ class KlentServis
             ]);
             $foo = User::find($value->user_id);
             $son = $foo->son - $value->soni;
-            $dona = $foo->dona - $value->dona;
-            User::find($value->user_id)->update([
-                'son'=>$son,
-                'dona'=>$dona
-            ]);
+            $son2 = $foo->dona * $value->soni;
+            $jami = $foo->jami - $value->dona - $son2;
+            $sotjami = $foo->sotjami + $value->dona;
+            if($foo->dona <= $sotjami){
+                $roo = $sotjami - $foo->dona;
+                if($foo->dona == $value->dona){
+                    $son4 = $son - 1;
+                    User::find($value->user_id)->update([
+                        'son'=>$son4,
+                        'jami'=>$jami,
+                        'sotjami'=>$roo,
+                    ]);
+                }else{
+                    $soner = $son - 1;
+                    User::find($value->user_id)->update([
+                        'son'=>$soner,
+                        'jami'=>$jami,
+                        'sotjami'=>$roo,
+                    ]);
+                }
+            }else{
+                if($foo->dona == $value->dona){
+                    $son4 = $son - 1;
+                    User::find($value->user_id)->update([
+                        'son'=>$son4,
+                        'jami'=>$jami,
+                        'sotjami'=>$sotjami,
+                    ]);
+                }else{
+                    User::find($value->user_id)->update([
+                        'son'=>$son,
+                        'jami'=>$jami,
+                        'sotjami'=>$sotjami,
+                    ]);
+                }
+            }
         }
         Itogo::find(1)->update([
             'itogo'=>0,

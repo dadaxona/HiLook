@@ -186,11 +186,11 @@
             </div>
             <div class="row">
                 <div class="col-6 mb-3">
-                    <label for="message-text" class="col-form-label">Тавар хажми боича</label>
+                    <label for="message-text" class="col-form-label">Тавар хажми боича <span id="soon"></span> та гача</label>
                     <input type="number" class="form-control form-con" name="sonkal" id="sonkal">
                 </div>
                 <div class="col-6 mb-3">
-                    <label for="message-text" class="col-form-label">Тавар сони боича</label>
+                    <label for="message-text" class="col-form-label">Тавар сони боича <span id="doona"></span> та гача</label>
                     <input type="number" class="form-control form-con" name="donakal" id="donakal">
                 </div>
             </div>
@@ -314,7 +314,11 @@
                 $("#t_id").val(data.id);
                 $("#name2").val(data.name);
                 $("#son").val(data.son);
+                $("#soon").html(data.son);
                 $("#dona").val(data.dona);
+                $("#sonkal").val('');
+                $("#donakal").val('');
+                $("#doona").html(data.dona);
                 $("#summa2").val(data.summa2);
                 $('#edit').modal('show');
             }
@@ -374,23 +378,24 @@ $(document).ready(function(){
         var sonkal = $("#sonkal").val();
         var summa2 = $("#summa2").val();
         var dona = $("#dona").val();
-        var donakal = $("#donakal").val();
+        var donakal = $("#donakal").val();  
         var j = summa2 * sonkal;
         var j2 = donakal * summa2 / dona;
         var a = j + j2;
         $("#sot").val(a);
         $("#sot2").val(a);
     });
+    
     $(document).on('keyup', '#donakal', function(){
         var donakal = $("#donakal").val();
         var summa2 = $("#summa2").val();
         var dona = $("#dona").val();
-        var sonkal = $("#sonkal").val();
+        var sonkal = $("#sonkal").val();     
         var j2 = donakal * summa2 / dona;
         var j = summa2 * sonkal;
         var a =  j2 + j;
         $("#sot").val(a);
-        $("#sot2").val(a);
+        $("#sot2").val(a);        
     });
 
     $(document).on('keyup', '#naqt', function(){
@@ -451,9 +456,9 @@ $(document).ready(function(){
     $("#saqlash").on('click', function(){
         var id = $("#t_id").val();            
         var sonkal = $("#sonkal").val();
-        var donakal = $("#donakal").val();            
+        var donakal = $("#donakal").val();
         var sot = $("#sot2").val();
-        let _token   = $('meta[name="csrf-token"]').attr('content');
+        let _token   = $('meta[name="csrf-token"]').attr('content');              
         $.ajax({
             url: "{{ route('sazdat') }}",
             type: 'POST',
@@ -465,27 +470,27 @@ $(document).ready(function(){
                 _token: _token
             },
             success: function(data) {
-                if(data.code == 0){
-                    toastr.error(data.msg);
-                }else{
-                    $('#tbody').prepend('<tr onclick="belgilash('+data.data.id+')"><td>'+data.data.name+'</td><td>'+data.data.summa2+'</td><td>'+data.data.soni+'</td><td>'+data.data.dona+'</td><td>'+data.data.itog+'</td></tr>');
-                    $("#itog").val(data.data2.itogo);
-                    $("#itog2").val(data.data2.itogo);
-                    $("#t_id").val('');
-                    $("#name2").val('');
-                    $("#son").val('');
-                    $("#dona").val('');
-                    $("#summa2").val('');
-                    $("#sonkal").val('');
-                    $("#sonkal").val('');
-                    $("#sot").val('');
-                    $("#sot2").val('');
-                    $('#edit').modal('hide');
-                    toastr.success(data.msg).fadeOut(1500);
-                }                  
-            }
-        });            
-    });
+            if(data.code == 0){
+                toastr.error(data.msg);
+            }else{
+                $('#tbody').prepend('<tr onclick="belgilash('+data.data.id+')"><td>'+data.data.name+'</td><td>'+data.data.summa2+'</td><td>'+data.data.soni+'</td><td>'+data.data.dona+'</td><td>'+data.data.itog+'</td></tr>');
+                $("#itog").val(data.data2.itogo);
+                $("#itog2").val(data.data2.itogo);
+                $("#t_id").val('');
+                $("#name2").val('');
+                $("#son").val('');
+                $("#dona").val('');
+                $("#summa2").val('');
+                $("#sonkal").val('');
+                $("#donakal").val('');
+                $("#sot").val('');
+                $("#sot2").val('');
+                $('#edit').modal('hide');
+                toastr.success(data.msg).fadeOut(1500);
+            }                  
+        }
+    }); 
+});
 
     $("#usdkurd2").on('click', function(){
         var usdkurd = $("#usdkurd").val();
