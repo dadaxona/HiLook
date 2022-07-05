@@ -112,7 +112,6 @@ class AuthController extends Controller
             ]);
         }else{
             return redirect('/logaut');
-        }
-        
+        }   
     }
 }
