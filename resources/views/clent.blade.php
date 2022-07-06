@@ -15,8 +15,10 @@
 </style>
 <div class="card p-0">
         <div class="card-header">
-                <button type="button" class="btn btn-primary" onclick="addPost()">Товар кошиш</button>          
-                <button id="import" class="btn btn-success">Import</button>
+              <button type="button" class="btn btn-primary" onclick="addPost()">Товар кошиш</button>          
+              <button id="import" class="btn btn-success">Import</button>              
+              {{-- <input type="text" name="country" id="country" placeholder="Enter country name">        
+              <div id="country_list"></div>     --}}
               
               <div class="row">
                 {{-- <div class="col-12"> --}}
@@ -175,23 +177,17 @@
 
     $('#country').on('keyup',function() {
         var query = $(this).val(); 
-        $.ajax({
-            
-            url:"{{ route('search') }}",
-      
-            type:"GET",
-            
-            data:{'country':query},
-            
-            success:function (data) {
-              
+        $.ajax({            
+            url:"{{ route('searchcountry') }}",      
+            type:"GET",            
+            data:{'country':query},            
+            success:function (data) {              
                 $('#country_list').html(data);
             }
         })
     });
     
     $(document).on('click', 'li', function(){
-      
         var value = $(this).text();
         $('#country').val(value);
         $('#country_list').html("");
