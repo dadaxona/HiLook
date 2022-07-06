@@ -15,7 +15,9 @@
 </style>
 <div class="card p-0">
         <div class="card-header">
-                <button type="button" class="btn btn-primary" onclick="addPost()">Товар кошиш</button>
+                <button type="button" class="btn btn-primary" onclick="addPost()">Товар кошиш</button>          
+                <button id="import" class="btn btn-success">Import</button>
+              
               <div class="row">
                 {{-- <div class="col-12"> --}}
                  <table class="tab table-hover" id="laravel_crud">
@@ -146,10 +148,58 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="tavar2delete2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <form action="{{ route('imports') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                  <input type="file" name="import" class="form-control" id="import">
+                </div>
+                <div class="text-center pb-4">
+                    <button type="submit" class="btn btn-success">Import</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
 <script>
   $( function() {
     $( "#clent" ).selectable();
   } );
+
+    $('#country').on('keyup',function() {
+        var query = $(this).val(); 
+        $.ajax({
+            
+            url:"{{ route('search') }}",
+      
+            type:"GET",
+            
+            data:{'country':query},
+            
+            success:function (data) {
+              
+                $('#country_list').html(data);
+            }
+        })
+    });
+    
+    $(document).on('click', 'li', function(){
+      
+        var value = $(this).text();
+        $('#country').val(value);
+        $('#country_list').html("");
+    });
+
+  $(document).on('click', '#import', function(){
+    $('#tavar2delete2').modal('show');
+  });
     $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

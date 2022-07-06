@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
 use App\Models\Admin;
+use App\Models\Dori;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
 use App\Models\Itogo;
@@ -13,6 +15,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AuthController extends Controller
 {
@@ -113,5 +116,32 @@ class AuthController extends Controller
         }else{
             return redirect('/logaut');
         }   
+    }
+
+    public function imports(Request $request)
+    {
+        Excel::import(new UsersImport, $request->file('import'));
+        return back();
+    }
+
+    function searchcountry(Request $request)
+    {
+     
+        if($request->ajax()) {
+          
+            $data = Dori::where('name', 'LIKE', $request->country.'%')->get();           
+            $output = '';           
+            if (count($data)>0) {              
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';              
+                foreach ($data as $row){                   
+                    $output .= '<li class="list-group-item">'.$row->name.'</li>';
+                }              
+                $output .= '</ul>';
+            }
+            else {             
+                $output .= '<li class="list-group-item">'.'No results'.'</li>';
+            }           
+            return response()->json($output);
+        }
     }
 }

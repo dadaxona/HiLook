@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('posts', KlentController::class);
 Route::get('/', [AuthController::class,'login']);
+Route::post('imports', [AuthController::class,'imports'])->name('imports');
+Route::get('searchcountry', [AuthController::class,'searchcountry'])->name('searchcountry');
 Route::post('login-user', [AuthController::class,'loginuser'])->name('login-user');
 Route::get('/glavninachal', [AuthController::class,'dashbord'])->middleware('isLog');
 Route::get('/logaut', [AuthController::class,'logaut']);
