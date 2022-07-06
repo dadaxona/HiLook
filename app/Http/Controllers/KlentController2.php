@@ -624,7 +624,6 @@ class KlentController2 extends Controller
         {
             $output = '';
             $output2 = '';
-            $da = User::find($request->tavar_id);   
             $data = Karzina2::whereBetween('updated_at', [$request->date, $request->date2])->get(); 
             $data222 = Arxiv::whereBetween('updated_at', [$request->date, $request->date2])->get();
             $total_row = $data->count();
@@ -704,7 +703,7 @@ class KlentController2 extends Controller
             return response()->json([
                 'output'=>$output,
                 'output2'=>$output2,
-                'clent'=>$da,
+                'clent'=>"",
                 'foo2'=>$foo2??[],
             ]);
         }
@@ -716,7 +715,6 @@ class KlentController2 extends Controller
             {
                 $output = '';
                 $output2 = '';
-                $da = User::find($request->tavar_id);   
                 $data = Karzina2::whereBetween('updated_at', [$request->date, $request->date2])->get();
                 $data222 = Arxiv::whereBetween('updated_at', [$request->date, $request->date2])->get();
                 $total_row = $data->count();
@@ -796,7 +794,7 @@ class KlentController2 extends Controller
                 return response()->json([
                     'output'=>$output,
                     'output2'=>$output2,
-                    'clent'=>$da,
+                    'clent'=>"",
                     'foo2'=>$foo2??[],
                 ]);
             }
@@ -805,7 +803,6 @@ class KlentController2 extends Controller
             {
                 $output = '';
                 $output2 = '';
-                $da = User::find($request->id);   
                 $data = Karzina2::whereBetween('updated_at', [$request->date, $request->date2])->get();
                 $data222 = Arxiv::whereBetween('updated_at', [$request->date, $request->date2])->get();
                 $total_row = $data->count();

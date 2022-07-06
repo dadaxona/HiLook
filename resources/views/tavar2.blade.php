@@ -141,9 +141,9 @@
                               <input type="text" id="foiz" class="form-control sifra" placeholder="Товар протсент">
                               <input type="text" id="dateitog" class="form-control sifra" placeholder="Итого">  
                             </div>
-                            <div class="col-5">
+                            <div class="col-4">
                             </div>
-                            <div class="col-3 mt-4">
+                            <div class="col-4 mt-4">
                               <form>
                                 @csrf
                                 <div class="d-flex">
@@ -197,7 +197,6 @@
                           </div>
                         </div>
                         </div>
-                        <p class="m-0 text-center">Пусто</p>
                     </div>
                 </div>
             </div>

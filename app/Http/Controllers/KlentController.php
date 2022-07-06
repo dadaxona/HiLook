@@ -510,8 +510,9 @@ class KlentController extends KlentController2
     
     public function belgi2(Request $request)
     {
-        $post = Karzina::find($request->id);    
-        return response()->json($post);
+        $post = Karzina::find($request->id);
+        $data = User::find($post->user_id);
+        return response()->json(['post'=>$post ,'data'=>$data]);
     }
 
     public function kursm()
@@ -730,16 +731,7 @@ class KlentController extends KlentController2
 
     public function yangilash(Request $request, KlentServis $model)
     {
-        $validator = Validator::make($request->all(), [
-            'soni' => 'required',
-            'summo' => 'required',
-            'summ' => 'required'
-        ]);
-        if($validator->passes()){
-            return $model->yangilash($request);
-        }else{            
-            return response()->json(['code'=>0, 'msg'=>'Малумотни киритинг', 'error'=>$validator->errors()->toArray()]);
-        }
+        return $model->yangilash($request);    
     }
 
     public function rachot()

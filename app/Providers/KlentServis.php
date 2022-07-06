@@ -328,20 +328,22 @@ class KlentServis
     {
         $foo1 = Karzina::find($request->id);
         $row = User::find($foo1->user_id);
-        if($request->soni > $row->son){
-            return response()->json(['msg'=>'Тавар етарли емас', 'code'=>0]);
+        if($request->sonkal > $row->son){
+            return response()->json(['msg'=>'Хажим устуни белгиланган кийматдан коп', 'code'=>0]);
+        }elseif ($request->donakal > $row->dona) {
+            return response()->json(['msg'=>'Сон устуни белгиланган кийматдан коп', 'code'=>0]);
         }else{
             $b = Itogo::find(1);
             $pool = $b->itogo - $foo1->itog;
-            $poo2 = $pool + $request->summ;
+            $poo2 = $pool + $request->sot;
             Itogo::find(1)->update([
                 'itogo'=>$poo2
             ]);
             Karzina::find($request->id)->update([
-                'soni'=>$request->soni,
+                'soni'=>$request->sonkal,
+                'dona'=>$request->donakal,
                 'summa2'=>$request->summo,
-                'chegirma'=>$request->cheg,
-                'itog'=>$request->summ,
+                'itog'=>$request->sot,
             ]);
             $foo3 = Karzina::find($request->id);
             $b2 = Itogo::find(1);

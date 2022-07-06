@@ -194,7 +194,7 @@
                           </li>
                       </ul>
                       <ul class="nav-right">
-                          <li class="header-notification">
+                          {{-- <li class="header-notification">
                               <a href="#!" class="waves-effect waves-light">
                                   <i class="ti-bell"></i>
                                   <span class="badge bg-c-red"></span>
@@ -205,7 +205,7 @@
                                       <label class="label label-danger">New</label>
                                   </li>
                               </ul>
-                          </li>
+                          </li> --}}
                           <li class="user-profile header-notification">
                               <a href="#!" class="waves-effect waves-light">
                                   <img src="assets/images/a.jpg" class="img-radius" alt="User-Profile-Image">

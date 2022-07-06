@@ -160,6 +160,54 @@
  </div>        
 </div>
 
+<div class="modal fade" id="editee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><input type="text" class="form-control fff" id="name2s" disabled></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <input type="hidden" name="" id="t_ids">
+                <div class="col-6 mb-3">
+                    <label for="message-text" class="col-form-label">Тавар хажми</label>
+                    <input type="number" class="form-control form-con" name="son" id="sons" disabled>
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="message-text" class="col-form-label">Тавар сони</label>
+                    <input type="number" class="form-control form-con" name="dona" id="donas" disabled>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="message-text" class="col-form-label">Тавар суммаси</label>
+                <input type="number" class="form-control form-con" name="summa2" id="summa2s" disabled>
+            </div>
+        
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label for="message-text" class="col-form-label">Тавар хажми боича <span id="soon2s"></span> та гача</label>
+                    <input type="number" class="form-control form-con" name="sonkal" id="sonkals">
+                </div>
+                <div class="col-6 mb-3">
+                    <label for="message-text" class="col-form-label">Тавар сони боича <span id="doona2s"></span> та гача</label>
+                    <input type="number" class="form-control form-con" name="donakal" id="donakals">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="message-text" class="col-form-label">Сотув суммаси</label>
+                <input type="number" class="form-control form-con" name="sot" id="sots" disabled>
+            </div>          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="nazad">Назад</button>
+          <button type="submit" class="btn btn-primary" id="saqlashs">Сохранить</button>
+        </div>   
+      </div>
+    </div>
+  </div>
+
+
 <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -182,7 +230,6 @@
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Тавар суммаси</label>
                 <input type="number" class="form-control form-con" name="summa2" id="summa2" disabled>
-                <input type="hidden" id="sum2">
             </div>
             <div class="row">
                 <div class="col-6 mb-3">
@@ -197,7 +244,6 @@
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Сотув суммаси</label>
                 <input type="number" class="form-control form-con" name="sot" id="sot" disabled>
-                <input type="hidden" id="sot2">
             </div>          
         </div>
         <div class="modal-footer">
@@ -230,24 +276,39 @@
                     <div class="col-4">
                         <h5 class="mt-2 mx-2">Наличные:</h5>
                     </div>                    
-                   <div class="col-8">
+                   <div class="col-6">
                     <input type="number" class="form-control text-right itogsw" name="naqt" id="naqt">
+                   </div>
+                   <div class="col-2">
+                    <button class="btn btn-success" onclick="naq()">
+                        =
+                    </button>
                    </div>
                 </div>
                 <div class="mb-3 d-flex">
                     <div class="col-4">
                         <h5 class="mt-2 mx-2">Карта:</h5> 
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <input type="number" class="form-control text-right itogsw" name="plastik" id="plastik">
                     </div>
-                </div>  
+                    <div class="col-2">
+                        <button class="btn btn-success" onclick="pla()">
+                            =
+                        </button>                        
+                    </div>
+                </div>
                 <div class="mb-3 d-flex">
                     <div class="col-4">
-                        <h5 class="mt-2 mx-2">Безнал:</h5>    
+                        <h5 class="mt-2 mx-2">Безнал:</h5>
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <input type="number" class="form-control text-right itogsw" name="bank" id="bank">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-success" onclick="bez()">
+                            =
+                        </button>                        
                     </div>
                 </div>
                 <div class="mb-3 d-flex">
@@ -269,7 +330,7 @@
             </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="nazad">Назад</button>
-          <button type="submit" class="btn btn-success" id="oplata">Оплаты</button>
+          <button type="submit" class="btn btn-primary" id="oplata">Оплаты</button>
         </div>
    
       </div>
@@ -303,27 +364,52 @@
     $( "#zaqazz123" ).selectable();
   } );
 
+  function naq() {
+    var itogs = $("#itogs").val();
+    $("#naqt").val(itogs);
+    $("#plastik").val('');
+    $("#bank").val('');
+    $("#karzs").val('');
+  }
+
+  function pla() {
+    var itogs = $("#itogs").val();
+    $("#plastik").val(itogs);
+    $("#naqt").val('');
+    $("#bank").val('');
+    $("#karzs").val('');
+  }
+
+  function bez() {
+    var itogs = $("#itogs").val();
+    $("#bank").val(itogs);
+    $("#naqt").val('');
+    $("#plastik").val('');
+    $("#karzs").val('');
+  }
+
   function plus(id) {
-        $.ajax({
-            url: "{{ route('tashlash') }}",
-            type: 'GET',
-            data: {
-                id: id,
-            },
-            success: function(data) {                
-                $("#t_id").val(data.id);
-                $("#name2").val(data.name);
-                $("#son").val(data.son);
-                $("#soon").html(data.son);
-                $("#dona").val(data.dona);
-                $("#sonkal").val('');
-                $("#donakal").val('');
-                $("#doona").html(data.dona);
-                $("#summa2").val(data.summa2);
-                $('#edit').modal('show');
-            }
-        });
-    }
+    $.ajax({
+        url: "{{ route('tashlash') }}",
+        type: 'GET',
+        data: {
+            id: id,
+        },
+        success: function(data) {                
+            $("#t_id").val(data.id);
+            $("#name2").val(data.name);
+            $("#son").val(data.son);
+            $("#soon").html(data.son);
+            $("#dona").val(data.dona);
+            $("#doona").html(data.dona);
+            $("#summa2").val(data.summa2);
+            $("#sonkal").val('');
+            $("#donakal").val('');
+            $("#sot").val('');
+            $('#edit').modal('show');
+        }
+    });
+}
 
 function yangilash() {
     var id = $("#belgi2").val();
@@ -337,14 +423,17 @@ function yangilash() {
                 _token: _token
             },
             success: function(data) {
-                $("#name2").val(data.name);
-                $("#son").val(data.soni);
-                $("#summ").val(data.itog);
-                $("#summo").val(data.summa2);
-                $("#summ2").val(data.summa2);                    
-                $("#sum2").val(data.itog);
-                $("#cheg").val('');
-                $('#edit').modal('show');
+                $("#t_ids").val(data.post.id);
+                $("#name2s").val(data.post.name);
+                $("#sons").val(data.data.son);
+                $("#soon2s").html(data.data.son);
+                $("#donas").val(data.data.dona);
+                $("#sonkals").val(data.post.soni);
+                $("#donakals").val(data.post.dona);
+                $("#doona2s").html(data.post.dona);
+                $("#summa2s").val(data.post.summa2);
+                $("#sots").val(data.post.itog);
+                $('#editee').modal('show');
             }
         });
     }else{ 
@@ -383,7 +472,6 @@ $(document).ready(function(){
         var j2 = donakal * summa2 / dona;
         var a = j + j2;
         $("#sot").val(a);
-        $("#sot2").val(a);
     });
     
     $(document).on('keyup', '#donakal', function(){
@@ -394,8 +482,29 @@ $(document).ready(function(){
         var j2 = donakal * summa2 / dona;
         var j = summa2 * sonkal;
         var a =  j2 + j;
-        $("#sot").val(a);
-        $("#sot2").val(a);        
+        $("#sot").val(a);       
+    });
+
+    $(document).on('keyup', '#sonkals', function(){
+        var sonkals = $("#sonkals").val();
+        var summa2s = $("#summa2s").val();
+        var donas = $("#donas").val();
+        var donakals = $("#donakals").val();  
+        var j = summa2s * sonkals;
+        var j2 = donakals * summa2s / donas;
+        var a = j + j2;
+        $("#sots").val(a);
+    });
+    
+    $(document).on('keyup', '#donakals', function(){
+        var donakals = $("#donakals").val();
+        var summa2s = $("#summa2s").val();
+        var donas = $("#donas").val();
+        var sonkals = $("#sonkals").val();     
+        var j2 = donakals * summa2s / donas;
+        var j = summa2s * sonkals;
+        var a =  j2 + j;
+        $("#sots").val(a);    
     });
 
     $(document).on('keyup', '#naqt', function(){
@@ -457,7 +566,7 @@ $(document).ready(function(){
         var id = $("#t_id").val();            
         var sonkal = $("#sonkal").val();
         var donakal = $("#donakal").val();
-        var sot = $("#sot2").val();
+        var sot = $("#sot").val();
         let _token   = $('meta[name="csrf-token"]').attr('content');              
         $.ajax({
             url: "{{ route('sazdat') }}",
@@ -470,27 +579,66 @@ $(document).ready(function(){
                 _token: _token
             },
             success: function(data) {
-            if(data.code == 0){
-                toastr.error(data.msg);
-            }else{
-                $('#tbody').prepend('<tr onclick="belgilash('+data.data.id+')"><td>'+data.data.name+'</td><td>'+data.data.summa2+'</td><td>'+data.data.soni+'</td><td>'+data.data.dona+'</td><td>'+data.data.itog+'</td></tr>');
-                $("#itog").val(data.data2.itogo);
-                $("#itog2").val(data.data2.itogo);
-                $("#t_id").val('');
-                $("#name2").val('');
-                $("#son").val('');
-                $("#dona").val('');
-                $("#summa2").val('');
-                $("#sonkal").val('');
-                $("#donakal").val('');
-                $("#sot").val('');
-                $("#sot2").val('');
-                $('#edit').modal('hide');
-                toastr.success(data.msg).fadeOut(1500);
-            }                  
-        }
-    }); 
-});
+                if(data.code == 0){
+                    toastr.error(data.msg);
+                }else{
+                    $('#tbody').prepend('<tr onclick="belgilash('+data.data.id+')"><td>'+data.data.name+'</td><td>'+data.data.summa2+'</td><td>'+data.data.soni+'</td><td>'+data.data.dona+'</td><td>'+data.data.itog+'</td></tr>');
+                    $("#itog").val(data.data2.itogo);
+                    $("#itog2").val(data.data2.itogo);
+                    $("#t_id").val('');
+                    $("#name2").val('');
+                    $("#son").val('');
+                    $("#dona").val('');
+                    $("#summa2").val('');
+                    $("#sonkal").val('');
+                    $("#donakal").val('');
+                    $("#sot").val('');
+                    $('#edit').modal('hide');
+                    toastr.success(data.msg).fadeOut(1500);
+                }                  
+            }
+        }); 
+    });
+
+    $("#saqlashs").on('click', function(){
+        var id = $("#t_ids").val();            
+        var sonkals = $("#sonkals").val();
+        var donakals = $("#donakals").val();
+        var summo = $("#summa2s").val();
+        var sots = $("#sots").val();
+        let _token   = $('meta[name="csrf-token"]').attr('content');              
+        $.ajax({
+            url: "{{ route('yangilash') }}",
+            type: 'POST',
+            data: {
+                id: id,
+                sonkal: sonkals,
+                donakal: donakals,
+                summo: summo,
+                sot: sots,
+                _token: _token
+            },
+            success: function(data) {
+                if(data.code == 0){
+                    toastr.error(data.msg);
+                }else{
+                    fetch_customer_data();
+                    $("#itog").val(data.data2.itogo);
+                    $("#itog2").val(data.data2.itogo);
+                    $("#t_ids").val('');
+                    $("#name2s").val('');
+                    $("#sons").val('');
+                    $("#donas").val('');
+                    $("#summa2s").val('');
+                    $("#sonkals").val('');
+                    $("#donakals").val('');
+                    $("#sots").val('');
+                    $('#editee').modal('hide');
+                    toastr.success(data.msg).fadeOut(1500);
+                }                  
+            }
+        }); 
+    });
 
     $("#usdkurd2").on('click', function(){
         var usdkurd = $("#usdkurd").val();
@@ -515,37 +663,6 @@ $(document).ready(function(){
         });
     });
 
-    $(document).on('click', '#SubmitCkicked' ,function(){
-        var id = $("#user_zaq").val();
-        var doimiy = $("#diomiy").val();
-        let _token = $('meta[name="csrf-token"]').attr('content');
-        if(id){
-            $.ajax({
-                url:"{{ route('submitckicked') }}",
-                method:'POST',
-                data:{
-                    id: id,
-                    doimiy: doimiy,
-                    _token: _token
-                },
-                dataType:'json',
-                success:function(data)
-                {
-                    fetch_customer_data();
-                    $("#itog2").val(data.data.itogo);
-                    $("#itog").val(data.data.itogo);
-                    $("#kurs").val(data.data.kurs);
-                    $("#kurs2").val(data.data.kurs);
-                    $("#user_zaq").val('');
-                    $('#zaqazmodal').toggle('fold');
-                    toastr.success(data.msg).fadeOut(1500);
-                }
-            });
-        }else{
-            toastr.error("Клентни белгиланг").fadeOut(1500);
-        }
-    });
-
     $("#tayyor").on('click', function(){
         var itog = $("#itog").val();
         var itog2 = $("#itog2").val();
@@ -557,6 +674,7 @@ $(document).ready(function(){
                 type: 'GET',
                 success: function(data) {
                     $("#itogs").val(data.itogo);
+                    $("#naqt").val(data.itogo);
                     $("#jonatish").modal("show");                        
                 }
             });
