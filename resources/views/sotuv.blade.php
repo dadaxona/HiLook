@@ -70,7 +70,7 @@
         <div class="col-sm-12 card">
             <div class="card-header">
                 <div class="card-header-left">
-                    <h4>Торговля</h4>
+                    <h4 class="mr-2">Торговля</h4>
                 </div>
                 <button onclick="yangilash()" class="btn btn-warning m-0 p-2" style="color: black;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
