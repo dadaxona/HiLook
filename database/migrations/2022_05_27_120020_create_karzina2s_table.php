@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('arxiv_name')->nullable();
             $table->string('name')->nullable();
             $table->string('raqam')->nullable();
-            $table->integer('soni')->nullable();
-            $table->integer('summa2')->nullable();
-            $table->integer('dona')->nullable();
-            $table->integer('itog')->nullable();
+            $table->string('soni')->nullable();
+            $table->string('summa2')->nullable();
+            $table->string('dona')->nullable();
+            $table->string('itog')->nullable();
             $table->timestamps();
         });
     }

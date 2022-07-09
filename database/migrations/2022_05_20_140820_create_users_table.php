@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
-            $table->integer('son')->nullable();
-            $table->integer('dona')->nullable();
-            $table->integer('summa')->nullable();
-            $table->integer('summa2')->nullable();
+            $table->string('son')->nullable();
+            $table->string('dona')->nullable();
+            $table->string('summa')->nullable();
+            $table->string('summa2')->nullable();
             $table->string('kod')->nullable();
-            $table->integer('jami')->nullable();
-            $table->integer('sotjami')->nullable();
+            $table->string('jami')->nullable();
+            $table->string('sotjami')->nullable();
             $table->timestamps();
         });
     }

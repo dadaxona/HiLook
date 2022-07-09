@@ -172,31 +172,31 @@
                 <input type="hidden" name="" id="t_ids">
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар хажми</label>
-                    <input type="number" class="form-control form-con" name="son" id="sons" disabled>
+                    <input type="text" class="form-control form-con" name="son" id="sons" disabled>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар сони</label>
-                    <input type="number" class="form-control form-con" name="dona" id="donas" disabled>
+                    <input type="text" class="form-control form-con" name="dona" id="donas" disabled>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Тавар суммаси</label>
-                <input type="number" class="form-control form-con" name="summa2" id="summa2s" disabled>
+                <input type="text" class="form-control form-con" name="summa2" id="summa2s" disabled>
             </div>
         
             <div class="row">
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар хажми боича <span id="soon2s"></span> та гача</label>
-                    <input type="number" class="form-control form-con" name="sonkal" id="sonkals">
+                    <input type="text" class="form-control form-con" name="sonkal" id="sonkals">
                 </div>
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар сони боича <span id="doona2s"></span> та гача</label>
-                    <input type="number" class="form-control form-con" name="donakal" id="donakals">
+                    <input type="text" class="form-control form-con" name="donakal" id="donakals">
                 </div>
             </div>
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Сотув суммаси</label>
-                <input type="number" class="form-control form-con" name="sot" id="sots" disabled>
+                <input type="text" class="form-control form-con" name="sot" id="sots" disabled>
             </div>          
         </div>
         <div class="modal-footer">
@@ -220,30 +220,30 @@
                 <input type="hidden" name="" id="t_id">
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар хажми</label>
-                    <input type="number" class="form-control form-con" name="son" id="son" disabled>
+                    <input type="text" class="form-control form-con" name="son" id="son" disabled>
                 </div>
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар сони</label>
-                    <input type="number" class="form-control form-con" name="dona" id="dona" disabled>
+                    <input type="text" class="form-control form-con" name="dona" id="dona" disabled>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Тавар суммаси</label>
-                <input type="number" class="form-control form-con" name="summa2" id="summa2" disabled>
+                <input type="text" class="form-control form-con" name="summa2" id="summa2" disabled>
             </div>
             <div class="row">
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар хажми боича <span id="soon"></span> та гача</label>
-                    <input type="number" class="form-control form-con" name="sonkal" id="sonkal">
+                    <input type="text" class="form-control form-con" name="sonkal" id="sonkal">
                 </div>
                 <div class="col-6 mb-3">
                     <label for="message-text" class="col-form-label">Тавар сони боича <span id="doona"></span> та гача</label>
-                    <input type="number" class="form-control form-con" name="donakal" id="donakal">
+                    <input type="text" class="form-control form-con" name="donakal" id="donakal">
                 </div>
             </div>
             <div class="mb-3">
                 <label for="message-text" class="col-form-label">Сотув суммаси</label>
-                <input type="number" class="form-control form-con" name="sot" id="sot" disabled>
+                <input type="text" class="form-control form-con" name="sot" id="sot" disabled>
             </div>          
         </div>
         <div class="modal-footer">

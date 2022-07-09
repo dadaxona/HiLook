@@ -18,10 +18,10 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('name')->nullable();
             $table->string('raqam')->nullable();
-            $table->integer('soni')->nullable();
-            $table->integer('dona')->nullable();
-            $table->integer('summa2')->nullable();
-            $table->integer('itog')->nullable();
+            $table->string('soni')->nullable();
+            $table->string('dona')->nullable();
+            $table->string('summa2')->nullable();
+            $table->string('itog')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');

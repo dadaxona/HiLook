@@ -274,10 +274,10 @@ class KlentController extends KlentController2
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'son' => 'required',
-            'dona' => 'required',
-            'summa' => 'required',
-            'summa2' => 'required',
+            'son' => 'required|numeric',
+            'dona' => 'required|numeric',
+            'summa' => 'required|numeric',
+            'summa2' => 'required|numeric',
             'kod' => 'nullable',
         ]);
         if($validator->passes()){
@@ -351,11 +351,11 @@ class KlentController extends KlentController2
     {
         $validator = Validator::make($request->all(), [
             'addmore.*.name' => 'required',
-            'addmore.*.son' => 'required',
-            'addmore.*.dona' => 'required',
-            'addmore.*.summa' => 'required',
-            'addmore.*.summa2' => 'required',
-            'addmore.*.kod' => 'required',
+            'addmore.*.son' => 'required|numeric',
+            'addmore.*.dona' => 'required|numeric',
+            'addmore.*.summa' => 'required|numeric',
+            'addmore.*.summa2' => 'required|numeric',
+            'addmore.*.kod' => 'nullable',
         ]);
         if($validator->passes()){
             return $model->store3($request);
@@ -692,7 +692,7 @@ class KlentController extends KlentController2
                     $output .= '
                     <tr onclick="plus('.$row->id.')">
                     <td class="ui-widget-content">'.$row->name.'</td>
-                    <td class="ui-widget-content">'."(".$row->son."/".$row->dona.")".'</td>
+                    <td class="ui-widget-content">'."(".$row->son." / ".$row->dona.")".'</td>
                     <td class="ui-widget-content">'.$row->summa2.'</td>
                     </tr>
                     ';

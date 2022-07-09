@@ -100,22 +100,22 @@
                 </div>
                 <div class="mb-3">
                   <label for="message-text" class="col-form-label">Сон</label>
-                  <input type="number" class="form-control" name="son"  id="son">
+                  <input type="text" class="form-control" name="son"  id="son">
                   <span class="text-danger error-text son_error"></span>
                 </div>
                 <div class="mb-3">
                   <label for="message-text" class="col-form-label">Дона</label>
-                  <input type="number" class="form-control" name="dona"  id="dona">
+                  <input type="text" class="form-control" name="dona"  id="dona">
                   <span class="text-danger error-text dona_error"></span>
                 </div>
                 <div class="mb-3">
                   <label for="message-text" class="col-form-label">Олиниш нархи</label>
-                  <input type="number" class="form-control" name="summa"  id="summa">
+                  <input type="text" class="form-control" name="summa"  id="summa">
                   <span class="text-danger error-text summa_error"></span>
                 </div>
                 <div class="mb-3">
                   <label for="message-text" class="col-form-label">Сотилиш нархи</label>
-                  <input type="number" class="form-control" name="summa2" id="summa2">
+                  <input type="text" class="form-control" name="summa2" id="summa2">
                   <span class="text-danger error-text summa_error"></span>
                 </div>
                 <div class="mb-3">
@@ -205,7 +205,7 @@
     var i = 0;
     $("#add").click(function(){            
             ++i;
-        $("#dynamicTable tbody").append('<tr><td><input type="text" name="addmore['+i+'][name]" id="" class="form-control mx-2" placeholder="Тавар имя"></td><td><input type="number" name="addmore['+i+'][son]" id="" class="form-control mx-2" placeholder="Тавар хажми"></td><td><input type="number" name="addmore['+i+'][dona]" id="" class="form-control mx-2" placeholder="Тавар сон"></td><td><input type="number" name="addmore['+i+'][summa]" id="" class="form-control mx-2" placeholder="Товар суммаси"></td><td><input type="number" name="addmore['+i+'][summa2]" id="" class="form-control mx-2" placeholder="Сотилиш суммаси"></td><td><input type="text" name="addmore['+i+'][kod]" id="" class="form-control mx-2" placeholder="Штрих код"></td><td><button type="button" class="btn btn-danger remove-tr">Удалить</button></td></tr>');
+        $("#dynamicTable tbody").append('<tr><td><input type="text" name="addmore['+i+'][name]" id="" class="form-control mx-2" placeholder="Тавар имя"></td><td><input type="text" name="addmore['+i+'][son]" id="" class="form-control mx-2" placeholder="Тавар хажми"></td><td><input type="text" name="addmore['+i+'][dona]" id="" class="form-control mx-2" placeholder="Тавар сон"></td><td><input type="text" name="addmore['+i+'][summa]" id="" class="form-control mx-2" placeholder="Товар суммаси"></td><td><input type="text" name="addmore['+i+'][summa2]" id="" class="form-control mx-2" placeholder="Сотилиш суммаси"></td><td><input type="text" name="addmore['+i+'][kod]" id="" class="form-control mx-2" placeholder="Штрих код"></td><td><button type="button" class="btn btn-danger remove-tr">Удалить</button></td></tr>');
     }); 
   
     $(document).on('click', '.remove-tr', function(){
