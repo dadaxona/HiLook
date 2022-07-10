@@ -137,10 +137,7 @@ class AuthController extends Controller
                     $output .= '<li class="list-group-item">'.$row->name.'</li>';
                 }              
                 $output .= '</ul>';
-            }
-            else {             
-                $output .= '<li class="list-group-item">'.'No results'.'</li>';
-            }           
+            }        
             return response()->json($output);
         }
     }

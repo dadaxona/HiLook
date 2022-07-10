@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Adress;
 use App\Models\Arxiv;
+use App\Models\Dori;
 use App\Models\Drektor;
 use App\Models\Ichkitavar;
 use App\Models\Tavar;
@@ -105,6 +106,7 @@ class KlentServis
                     'summa2'=>$value["summa2"],
                     'jami'=>$aaa,
                 ]);
+                Dori::create(['name'=>$value["name"]]);
                 $data2 = User::where('name', $value["name"])->where('kod', $value["kod"])->first();
             }else{
                 $aaa1 = $value["son"] * $value["dona"];
@@ -117,11 +119,45 @@ class KlentServis
                     'kod'=>$value["kod"],
                     'jami'=>$aaa1,
                 ]);
+                Dori::create(['name'=>$value["name"]]);
             }
         }
         return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data2], 200);
     }
 
+    
+    public function astore3($request)
+    {
+            $data = User::where('name', $request["name"])->where('kod', $request["kod"])->first();
+            if ($data) {
+                $son = $data->son + $request["son"];
+                $dona = $data->dona + $request["dona"];
+                $aaa = $data->jami + $request["son"] * $request["dona"];
+                User::where('name', $request["name"])->where('kod', $request["kod"])->update([
+                    'son'=>$son,
+                    'dona'=>$dona,
+                    'summa'=>$request["summa"], 
+                    'summa2'=>$request["summa2"],
+                    'jami'=>$aaa,
+                ]);
+                Dori::create(['name'=>$request["name"]]);
+                $data2 = User::where('name', $request["name"])->where('kod', $request["kod"])->first();
+            }else{
+                $aaa1 = $request["son"] * $request["dona"];
+                $data2 = User::create([
+                    'name'=>$request["name"],
+                    'son'=>$request["son"],
+                    'dona'=>$request["dona"],
+                    'summa'=>$request["summa"], 
+                    'summa2'=>$request["summa2"],
+                    'kod'=>$request["kod"],
+                    'jami'=>$aaa1,
+                ]);
+                Dori::create(['name'=>$request["name"]]);
+            }     
+        return response()->json(['code'=>200, 'msg'=>'Мувофакиятли яратилмади','data' => $data2], 200);
+    }
+    
     public function updates($request)
     {
         $data = Ichkitavar::find($request->id)->update($request->all());

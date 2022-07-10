@@ -44,6 +44,7 @@ Route::post('delete2/{id}', [KlentController::class, 'delete2']);
 Route::get('edit3', [KlentController::class, 'edit3'])->name('edit3');
 
 Route::post('store3', [KlentController::class, 'store3'])->name('store3');
+Route::post('astore3', [KlentController::class, 'astore3'])->name('astore3');
 Route::post('updates', [KlentController::class, 'updates'])->name('updates');
 Route::get('edit4', [KlentController::class, 'edit4'])->name('edit4');
 Route::post('delete3/{id}', [KlentController::class, 'delete3']);
