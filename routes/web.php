@@ -17,13 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('posts', KlentController::class);
-Route::get('/', [AuthController::class,'login']);
 Route::post('imports', [AuthController::class,'imports'])->name('imports');
 Route::get('searchcountry', [AuthController::class,'searchcountry'])->name('searchcountry');
 Route::post('login-user', [AuthController::class,'loginuser'])->name('login-user');
-Route::get('/glavninachal', [AuthController::class,'dashbord'])->middleware('isLog');
 Route::get('/logaut', [AuthController::class,'logaut']);
 Route::get('/profil', [AuthController::class,'profil'])->name('profil');
+
+Route::group(['middleware'=>['isLog']], function(){
+    Route::get('/', [AuthController::class,'login']);
+    Route::get('/glavninachal', [AuthController::class,'dashbord']);    
+});
+
 
 Route::get('tavar_live', [KlentController::class, 'tavar_live'])->name('tavar_live');
 Route::get('live_adress', [KlentController::class, 'live_adress'])->name('live_adress');
