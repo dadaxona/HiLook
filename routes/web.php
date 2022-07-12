@@ -28,7 +28,6 @@ Route::group(['middleware'=>['isLog']], function(){
     Route::get('/glavninachal', [AuthController::class,'dashbord']);    
 });
 
-
 Route::get('tavar_live', [KlentController::class, 'tavar_live'])->name('tavar_live');
 Route::get('live_adress', [KlentController::class, 'live_adress'])->name('live_adress');
 Route::get('live_clent', [KlentController::class, 'live_clent'])->name('live_clent');
